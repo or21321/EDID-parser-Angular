@@ -1,7 +1,25 @@
 .edid-preview {
     border: 2px solid $grey;
+    min-height: 100%;
+    border-radius: 3px;
+
+    &.selected {
+        border: 2px solid $selected-border;
+    }
 
     header {
         background-color: $olive-green;
+        text-align: center;
+        color: #ffffff;
+        font-weight:500;
+
+        &.disconnected {
+            background-color: $grey;
+        }
+    }
+
+    main {
+        margin-top: 8px;
+        gap: 8px;
     }
 }

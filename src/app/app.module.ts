@@ -9,6 +9,7 @@ import { EdidFilterComponent } from './cmps/edid-filter/edid-filter.component';
 import { EdidListComponent } from './cmps/edid-list/edid-list.component';
 import { EdidPreviewComponent } from './cmps/edid-preview/edid-preview.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

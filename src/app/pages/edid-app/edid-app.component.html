@@ -1,1 +1,3 @@
-<edid-list [edids]="edids$ | async"></edid-list>
+<edid-filter (onFilter)="filter($event)"></edid-filter>
+<edid-list [selectedEdidId]="selectedEdidId" [edids]="edids$ | async" (onEdidSelect)="selectedEdidId=$event">
+</edid-list>

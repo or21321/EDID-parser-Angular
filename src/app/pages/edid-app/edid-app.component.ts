@@ -16,6 +16,7 @@ export class EdidAppComponent implements OnInit {
   subscription !: Subscription
 
   edids$ !: Observable<Edids>
+  selectedEdidId: string | undefined
 
   constructor(private edidService: EdidService, private router: Router) {
     this.subscription = this.edidService.filterBy$.subscribe((filterBy: FilterBy) => {
@@ -28,5 +29,9 @@ export class EdidAppComponent implements OnInit {
     this.edids$ = this.edidService.edids$
   }
 
+  filter(filterBy: FilterBy) {
+    console.log('filter', filterBy);
+    this.edidService.setFilter({...filterBy})
+  }
 
 }

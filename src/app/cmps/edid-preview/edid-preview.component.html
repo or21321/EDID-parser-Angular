@@ -1,10 +1,7 @@
-<li class="edid-preview">
-    <header>{{edid.name}}</header>
-    <main class="flex direction-column">
+<li (click)="selectEdid()" class="edid-preview" [class.selected]="isSelectedEdid">
+    <header [class.disconnected]="isDisconnected">{{edid.name}}</header>
+    <main class="flex direction-column grow">
         <span>{{edid.nativeResolution}}</span>
         <span>{{edid.size}}</span>
-        <span>{{edid.status}}</span>
     </main>
 </li>
-
-<!-- {"Name":"BenQ SC3211","NativeResolution":"1920X540","Size":256,"status":1} -->

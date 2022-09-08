@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Edid, Edids } from 'src/app/models/edid';
 
 @Component({
@@ -9,6 +9,9 @@ import { Edid, Edids } from 'src/app/models/edid';
 export class EdidListComponent implements OnInit {
 
   @Input() edids !: Edids | null
+  @Input() selectedEdidId: string | undefined
+
+  @Output() onEdidSelect = new EventEmitter<string>()
 
   constructor() { }
 

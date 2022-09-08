@@ -1,4 +1,5 @@
 <ul class="edid-list responsive-list">
-    <edid-preview *ngFor="let edid of edids" [edid]="edid">
+    <edid-preview *ngFor="let edid of edids" [edid]="edid" [selectedEdidId]="selectedEdidId"
+        (onSelect)="onEdidSelect.emit($event)">
     </edid-preview>
 </ul>

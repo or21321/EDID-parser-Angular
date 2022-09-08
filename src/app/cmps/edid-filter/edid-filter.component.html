@@ -1,1 +1,4 @@
-<p>edid-filter works!</p>
+<div class="edid-filter">
+    <input [(ngModel)]="filterBy.txt" (ngModelChange)="onFilter.emit(filterBy)" type="text"
+        placeholder="Search by name">
+</div>

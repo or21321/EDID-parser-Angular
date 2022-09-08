@@ -28,6 +28,7 @@ export class EdidService {
 
 
   private _formatEdid(edid: EdidFromJson): Edid {
+    // *Could be written nicer with es6 syntax
 
     // const { Name: name, NativeResolution: nativeResolution, Size: size, status
     // }: {
@@ -173,6 +174,7 @@ export class EdidService {
   private _filter(): void {
     const edids = this.utilService.loadFromStorage('edidsDb')
     const filterBy = this._filterBy$.getValue()
+    console.log(filterBy);
 
     const { txt } = filterBy
     // *Can use structuredClone (more efficient to deep copy)
