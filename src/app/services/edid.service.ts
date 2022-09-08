@@ -6,11 +6,9 @@ import { Edids, Edid, EdidFromJson } from '../models/edid';
 import { UtilService } from './util.service';
 import { FilterBy } from '../models/filter-by';
 
-interface Name {
-  common: string
-  official: string
-  nativeName: object
-}
+const FILE_NAMES = ["BenQ_SC3211", "Dell_ZT60", "Haier_LE39B50",
+  "LG_50LA621Y", "Mag_RD24L", "Normande_ND3276", "Panasonic_TH-L32B6",
+  "Philips_55PFL6008", "Philips_226V4LSB", "Samsung_UA46F6400"]
 
 @Injectable({
   providedIn: 'root'
@@ -53,9 +51,11 @@ export class EdidService {
     const edidsFromStorage = this.utilService.loadFromStorage('edidsDb')
 
     if (edidsFromStorage) {
+      console.log('From storage');
       this._edidsDb = edidsFromStorage
       this._sendEdids(this._edidsDb)
     } else {
+      console.log('From json');
       this._getEdidsFromJson()
     }
 
@@ -67,18 +67,41 @@ export class EdidService {
   }
 
   private _getEdidsFromJson() {
-    this.http.get<EdidFromJson>(`assets/JSONmonitors/BenQ SC3211`).pipe(
-      map((edid: EdidFromJson) => {
-        return [this._formatEdid(edid)]
-      })
-    ).subscribe({
-      next: (edids: Edids) => {
-        this._edidsDb = edids
-        this._sendEdids(edids)
-        this._saveEdidsToStorage()
-      },
-      error: err => console.log(err),
+    const edids: Edids = []
+    const requestsPrms = []
+
+    for (const fileName of FILE_NAMES) {
+      // Using promises for now, would be better to use rxjs only.
+      const prm = this.http.get(`assets/JSONmonitors/${fileName}.json`).toPromise()
+        .then((edid: any) => {
+          // Using any for now, because EdidFromJson doesnt work here.
+          const formattedEdid = this._formatEdid(edid)
+          console.log('formattedEdid', formattedEdid);
+          edids.push(formattedEdid)
+        })
+      requestsPrms.push(prm)
+    }
+
+    Promise.all(requestsPrms).then(() => {
+      console.log('edids', edids);
+      this._edidsDb = edids
+      this._sendEdids(edids)
+      this._saveEdidsToStorage()
     })
+
+
+    // this.http.get<EdidFromJson>(`assets/JSONmonitors/BenQ_SC3211.json`).pipe(
+    //   map((edid: EdidFromJson) => {
+    //     return [this._formatEdid(edid)]
+    //   })
+    // ).subscribe({
+    //   next: (edids: Edids) => {
+    //     this._edidsDb = edids
+    //     this._sendEdids(edids)
+    //     this._saveEdidsToStorage()
+    //   },
+    //   error: err => console.log(err),
+    // })
   }
 
 

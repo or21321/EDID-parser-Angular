@@ -8,6 +8,8 @@ import { AppHeaderComponent } from './cmps/app-header/app-header.component';
 import { EdidFilterComponent } from './cmps/edid-filter/edid-filter.component';
 import { EdidListComponent } from './cmps/edid-list/edid-list.component';
 import { EdidPreviewComponent } from './cmps/edid-preview/edid-preview.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { EdidPreviewComponent } from './cmps/edid-preview/edid-preview.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

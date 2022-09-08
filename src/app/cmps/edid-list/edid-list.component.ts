@@ -8,7 +8,7 @@ import { Edid, Edids } from 'src/app/models/edid';
 })
 export class EdidListComponent implements OnInit {
 
-  @Input() edids !: Edids
+  @Input() edids !: Edids | null
 
   constructor() { }
 
